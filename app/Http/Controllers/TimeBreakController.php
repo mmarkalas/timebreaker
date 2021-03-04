@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\TimeBreakdownRepositoryInterface;
+
 class TimeBreakController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var TimeBreakdownRepositoryInterface
      */
-    public function __construct()
-    {
-        //
+    private $timeBreakdownRepository;
+
+   /**
+     * IPAddressRepository constructor.
+     *
+     * @param TimeBreakdownRepositoryInterface $timeBreakdownRepository
+     */
+    public function __construct(
+        TimeBreakdownRepositoryInterface $timeBreakdownRepository
+    ) {
+        $this->timeBreakdownRepository = $timeBreakdownRepository;
     }
 
     public function index()
