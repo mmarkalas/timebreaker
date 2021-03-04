@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class ExampleController extends Controller
+class TimeBreakController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,5 +14,13 @@ class ExampleController extends Controller
         //
     }
 
-    //
+    public function index()
+    {
+        return "index";
+    }
+
+    public function breakTime()
+    {
+        return "breakTime";
+    }
 }

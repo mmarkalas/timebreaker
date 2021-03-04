@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TimeBreakController;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -16,3 +18,6 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('timebreak', "TimeBreakController@index");
+$router->post('timebreak', "TimeBreakController@breakTime");
