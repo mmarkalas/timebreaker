@@ -17,9 +17,8 @@ class TimeBreakController extends Controller
      *
      * @param TimeBreakdownRepositoryInterface $timeBreakdownRepository
      */
-    public function __construct(
-        TimeBreakdownRepositoryInterface $timeBreakdownRepository
-    ) {
+    public function __construct(TimeBreakdownRepositoryInterface $timeBreakdownRepository)
+    {
         parent::__construct();
         $this->timeBreakdownRepository = $timeBreakdownRepository;
     }
@@ -41,6 +40,10 @@ class TimeBreakController extends Controller
                 'to_date' => 'required|date|different:from_date',
                 'expression' => 'required',
             ]);
+
+            $result = $this->timeBreakdownRepository->process($request);
+            // dd($result);
+            $this->response->setPayload($result);
         });
     }
 }

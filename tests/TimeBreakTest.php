@@ -15,29 +15,27 @@ class TimeBreakTest extends TestCase
     {
         $parameters = [
             "from_date" => "2020-01-01T00:00:00",
-            "to_date" => "2020-03-01T12:30:00",
+            "to_date" => "2020-02-05T12:30:00",
             "expression" => [
                 "2m",
                 "m",
                 "d",
                 "2h"
             ]
-
         ];
 
         $this->post("timebreak", $parameters, []);
         $this->seeStatusCode(200);
-        $this->seeJsonStructure(
-            [
-                "success" => true,
-                "data" => [
-                    "2m" => 0,
-                    "m" => 1,
-                    "d" => 5,
-                    "2h" => 6.25
-                ]
-            ]    
-        );
+        $this->seeJsonEquals([
+            "success" => true,
+            "code" => 200,
+            "data" => [
+                "2m" => 0,
+                "m" => 1,
+                "d" => 5,
+                "2h" => 6.25
+            ]
+        ]);
     }
 
     /**
@@ -46,31 +44,31 @@ class TimeBreakTest extends TestCase
      *
      * [GET]
      */
-    public function testShouldReturnBreakdown(){
-        $this->get("timebreak?from_date=2020-01-01T00:00:00&to_date=2020-03-01T12:30:00", []);
+    public function testShouldReturnBreakdown()
+    {
+        $this->post("timebreak?from_date=2020-01-01T00:00:00&to_date=2020-03-01T12:30:00", $parameters, []);
         $this->seeStatusCode(200);
-        $this->seeJsonStructure(
-            [
-                "success" => true,
-                "data" => [
-                    [
-                        "from_date" => "2020-01-01T00:00:00",
-                        "to_date" => "2020-03-01T12:30:00",
-                        "expression" => [
-                            "2m",
-                            "m",
-                            "d",
-                            "2h"
-                        ],
-                        "result" => [
-                            "2m" => 0,
-                            "m" => 1,
-                            "d" => 5,
-                            "2h" => 6.25
-                        ]
+        $this->seeJsonEquals([
+            "success" => true,
+            "code" => 200,
+            "data" => [
+                [
+                    "from_date" => "2020-01-01T00:00:00",
+                    "to_date" => "2020-03-01T12:30:00",
+                    "expression" => [
+                        "2m",
+                        "m",
+                        "d",
+                        "2h"
+                    ],
+                    "result" => [
+                        "2m" => 0,
+                        "m" => 1,
+                        "d" => 5,
+                        "2h" => 6.25
                     ]
                 ]
-            ]     
-        );
+            ]
+        ]);
     }
 }

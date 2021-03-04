@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\TimeBreakController;
-
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*

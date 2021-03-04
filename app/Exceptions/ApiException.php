@@ -9,6 +9,10 @@ class ApiException extends HttpResponseException
 {
     public function __construct($message = null, $code = 500, array $details = [])
     {
+        if (!$code) {
+            $code = 500;
+        }
+
         // build response object
         $response = new Response();
 
