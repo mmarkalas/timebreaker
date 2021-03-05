@@ -3,9 +3,8 @@ os:
 
 language: php
 
-rvm:
+php:
  - 7.4.15
- - laravel/lumen
 
 before_script:
   - composer self-update
