@@ -40,33 +40,5 @@ services:
     networks:
       - timebreaker_network
 
-  composer:
-    build:
-      context: ./docker
-      dockerfile: composer.app
-    volumes:
-      - .:/var/www/html
-    working_dir: /var/www/html
-    depends_on:
-      - app
-    user: timebreaker
-    entrypoint: ['composer']
-    networks:
-      - timebreaker_network
-
-  artisan:
-    build:
-      context: ./docker
-      dockerfile: app.app
-    volumes:
-      - .:/var/www/html:delegated
-    depends_on:
-      - mysql
-    working_dir: /var/www/html
-    user: timebreaker
-    entrypoint: ['php', '/var/www/html/artisan']
-    networks:
-      - timebreaker_network
-
 networks:
   timebreaker_network:
