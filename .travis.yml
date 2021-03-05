@@ -23,4 +23,4 @@ script:
   - php artisan key:generate
   - php artisan migrate:refresh
   - vendor/bin/phpunit --coverage-text
-  - phpcs app
+  - phpcs --standard=PSR12 app
