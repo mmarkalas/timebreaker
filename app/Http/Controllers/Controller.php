@@ -11,6 +11,12 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+/**
+ * @OA\Info(
+ *    title="TimeBreaker API",
+ *    version="1.0.0",
+ * )
+ */
 class Controller extends BaseController
 {
     protected $response;
@@ -45,6 +51,7 @@ class Controller extends BaseController
         } catch (InvalidArgumentException $e) {
             throw new ApiException($e->getMessage(), Response::HTTP_UNPROCESSABLE_ENTITY);
         } catch (Exception $e) {
+            dd($e->getMessage());
             throw new ApiException($e->getMessage(), $e->getCode());
         }
     }

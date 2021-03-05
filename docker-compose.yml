@@ -40,5 +40,21 @@ services:
     networks:
       - timebreaker_network
 
+  composer:
+    build:
+      context: ./docker
+      dockerfile: composer.app
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - app
+    user: timebreaker
+    ports:
+      - 8181:3306
+    entrypoint: ['composer', 'install', '--ignore-platform-reqs']
+    networks:
+      - timebreaker_network
+
 networks:
   timebreaker_network:

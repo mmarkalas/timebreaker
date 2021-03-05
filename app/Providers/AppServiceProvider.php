@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+	private $bindings = [
+        "App\Services\CachingServiceInterface" => "App\Services\CachingService",
+    ];
+
     /**
      * Register any application services.
      *
@@ -14,5 +18,17 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        foreach ($this->bindings as $interface => $implementation) {
+            $this->app->bind($interface, $implementation);
+        }
     }
 }

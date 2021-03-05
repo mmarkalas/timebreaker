@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimeBreakdownTable extends Migration
+class CreateTimeBreakdownsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateTimeBreakdownTable extends Migration
      */
     public function up()
     {
-        Schema::create('time_breakdown', function (Blueprint $table) {
+        Schema::create('time_breakdowns', function (Blueprint $table) {
             $table->id();
             $table->timestamp("from_date")->nullable();
             $table->timestamp("to_date")->useCurrent();
             $table->json("expression");
-            $table->json("result");
+            $table->text("result");
+            $table->string("encoded_request")->nullable();
             $table->timestamps();
+
+            $table->index('encoded_request');
         });
     }
 
@@ -30,6 +33,6 @@ class CreateTimeBreakdownTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time_breakdown');
+        Schema::dropIfExists('time_breakdowns');
     }
 }

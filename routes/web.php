@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return "TimeBreaker";
 });
 
 $router->get('timebreak', "TimeBreakController@index");

@@ -20,7 +20,8 @@ class TimeBreakdown extends Model
         'from_date', 
         'to_date',
         'expression',
-        'result'
+        'result',
+        'encoded_request'
     ];
 
     /**
@@ -29,6 +30,16 @@ class TimeBreakdown extends Model
      * @var array
      */
     protected $hidden = [
-        //
+        "encoded_request"
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'expression' => 'array',
+        'result' => 'array',
     ];
 }

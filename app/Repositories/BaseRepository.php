@@ -72,6 +72,13 @@ class BaseRepository implements BaseRepositoryInterface
     protected $scopes = array();
 
     /**
+     * Cache Service
+     *
+     * @var array
+     */
+    protected $cacheService;
+
+    /**
      * BaseRepository constructor.
      *
      * @param Model $model
@@ -172,6 +179,23 @@ class BaseRepository implements BaseRepositoryInterface
 
     /**
      * Get the first specified model record from the database
+     * and fail if it's not existing
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function firstOrFail()
+    {
+        $this->newQuery()->eagerLoad()->setClauses()->setScopes();
+
+        $model = $this->query->firstOrFail();
+
+        $this->unsetClauses();
+
+        return $model;
+    }
+
+    /**
+     * Get the first specified model record from the database
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -179,7 +203,7 @@ class BaseRepository implements BaseRepositoryInterface
     {
         $this->newQuery()->eagerLoad()->setClauses()->setScopes();
 
-        $model = $this->query->firstOrFail();
+        $model = $this->query->first();
 
         $this->unsetClauses();
 
@@ -218,6 +242,24 @@ class BaseRepository implements BaseRepositoryInterface
         $this->newQuery()->eagerLoad();
 
         return $this->query->findOrFail($id);
+    }
+
+    /**
+     * Check if the specified model is existing in the database
+     *
+     * @param $id
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function exists()
+    {
+        $this->newQuery()->setClauses()->setScopes();
+
+        $exist = $this->query->exists();
+
+        $this->unsetClauses();
+
+        return $exist;
     }
 
 
