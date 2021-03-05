@@ -34,7 +34,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         $encodedRequest = $this->encodeRequest($request);
 
         $existing = $this->where('encoded_request', $encodedRequest)->first();
-        
+
         if ($existing) {
             return $existing->result;
         }
@@ -51,7 +51,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         if (!$this->cacheService->get($cacheKey)) {
             $fromDate = $request->has('from_date') ? Carbon::parse($request->from_date) : null;
             $toDate = $request->has('to_date') ? Carbon::parse($request->to_date) : null;
-            
+
             if ($fromDate) {
                 $this->where('from_date', $fromDate, '>=');
             }
@@ -93,7 +93,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         if ($request->has('expression') && isset($this->model->expression)) {
             $payload['expression'] = json_encode($this->model->expression);
         }
-        
+
         $encodedRequest = base64_encode(implode(",", $payload));
 
         return $encodedRequest;
@@ -116,7 +116,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
             $type = getLastCharacter($exp);
 
             $convertedToSec = $this->convertToSeconds($type, $count);
-            
+
             $remainder = $timeDiff % $convertedToSec;
 
             if ($remainder != $timeDiff) {
@@ -125,7 +125,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
                 if ($key == (count($sortedExpressions) - 1)) {
                     $total = round($timeDiff / $convertedToSec, 2);
                 }
-                
+
                 $timeDiff = $remainder;
             } else {
                 $total = 0;
@@ -133,7 +133,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
             $result[$exp] = $total;
         }
-        
+
         $this->model->result = $result;
 
         /**
@@ -157,14 +157,14 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         rsort($expression, SORT_NUMERIC);
 
         $order = str_split("cDymwdhis");
-        
+
         usort($expression, function ($a, $b) use ($order) {
             $substrA = getLastCharacter($a);
             $substrB = getLastCharacter($b);
 
             $posA = array_search($substrA, $order);
             $posB = array_search($substrB, $order);
-          
+
             if ($substrA != $substrB) {
                 return $posA - $posB;
             }
@@ -174,12 +174,12 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
             return $countA > $countB ? -1 : 1;
         });
-        
+
         $filteredExpression = array_values(array_unique($expression));
-        
+
         return $filteredExpression;
     }
-    
+
     private function convertToSeconds(string $type, float $count)
     {
         $secsPerMin = 60;
@@ -203,7 +203,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
             "i" => $secsPerMin,
             "s" => 1,
         ];
-        
+
         return (float) $count * $mapToSeconds[$type];
     }
 }

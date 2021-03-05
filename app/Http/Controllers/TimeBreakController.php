@@ -201,7 +201,7 @@ class TimeBreakController extends Controller
             ]);
 
             $result = $this->timeBreakdownRepository->process($request);
-            
+
             $this->response->setPayload($result);
         });
     }
