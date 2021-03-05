@@ -18,7 +18,7 @@ interface CachingServiceInterface
      * @param  int|integer $seconds
      * @return bool
      */
-    public function put(string $key, $data, int $seconds = 3600);
+    public function put(string $key, $data, int $seconds = 10);
 
     /**
      * Remove Data in Cache by using the key

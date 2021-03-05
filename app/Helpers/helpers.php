@@ -26,7 +26,7 @@ if (!function_exists("getCountFromExpression")) {
      */
     function getCountFromExpression(string $string)
     {
-        $firstChar = Str::substr($string, 0, strlen($string) -1);
+        $firstChar = Str::substr($string, 0, strlen($string) - 1);
         $result = is_numeric($firstChar) ? $firstChar :  1;
         return (float) $result;
     }

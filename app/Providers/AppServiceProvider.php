@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-	private $bindings = [
+    private $bindings = [
         "App\Services\CachingServiceInterface" => "App\Services\CachingService",
     ];
 

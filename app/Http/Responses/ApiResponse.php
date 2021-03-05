@@ -18,7 +18,7 @@ class ApiResponse
         $this->payload = [
             'success' => $this->success,
             'code' => $this->code,
-            'data' => $this->data   
+            'data' => $this->data
         ];
     }
 
@@ -53,6 +53,4 @@ class ApiResponse
         $this->payload['code'] = $code ?: $this->code;
         $this->payload['data'] = $data;
     }
-
-
 }

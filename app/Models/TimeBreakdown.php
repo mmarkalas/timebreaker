@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class TimeBreakdown extends Model 
+class TimeBreakdown extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class TimeBreakdown extends Model
      * @var array
      */
     protected $fillable = [
-        'from_date', 
+        'from_date',
         'to_date',
         'expression',
         'result',
@@ -30,7 +30,10 @@ class TimeBreakdown extends Model
      * @var array
      */
     protected $hidden = [
-        "encoded_request"
+        'encoded_request',
+        'created_at',
+        'updated_at',
+        'id'
     ];
 
     /**

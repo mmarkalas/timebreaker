@@ -46,15 +46,15 @@ class TimeBreakTest extends TestCase
      */
     public function testShouldReturnBreakdown()
     {
-        $this->post("timebreak?from_date=2020-01-01T00:00:00&to_date=2020-03-01T12:30:00", $parameters, []);
+        $this->get("timebreak?from_date=2020-01-01T00:00:00&to_date=2020-02-05T12:30:00", []);
         $this->seeStatusCode(200);
         $this->seeJsonEquals([
             "success" => true,
             "code" => 200,
             "data" => [
                 [
-                    "from_date" => "2020-01-01T00:00:00",
-                    "to_date" => "2020-03-01T12:30:00",
+                    "from_date" => "2020-01-01 00:00:00",
+                    "to_date" => "2020-02-05 12:30:00",
                     "expression" => [
                         "2m",
                         "m",

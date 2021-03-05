@@ -34,4 +34,3 @@ class ApiException extends HttpResponseException
         parent::__construct($response);
     }
 }
-

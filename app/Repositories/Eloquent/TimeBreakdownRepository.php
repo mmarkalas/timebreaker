@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRepositoryInterface 
+class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRepositoryInterface
 {
     /**
      * TimeBreakdownRepository constructor.
@@ -21,7 +21,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
      * @param CachingServiceInterface $cacheService
      */
     public function __construct(
-        TimeBreakdown $model, 
+        TimeBreakdown $model,
         CachingServiceInterface $cacheService
     ) {
         parent::__construct($model);
@@ -41,7 +41,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
         $result = $this->mapTimeBreakdown($request, $encodedRequest);
 
-    	return $result;
+        return $result;
     }
 
     public function search(Request $request)
@@ -49,7 +49,6 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         $cacheKey = $this->encodeRequest($request);
 
         if (!$this->cacheService->get($cacheKey)) {
-
             $fromDate = $request->has('from_date') ? Carbon::parse($request->from_date) : null;
             $toDate = $request->has('to_date') ? Carbon::parse($request->to_date) : null;
             
@@ -95,7 +94,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
             $payload['expression'] = json_encode($this->model->expression);
         }
         
-        $encodedRequest = base64_encode(implode(",",$payload));
+        $encodedRequest = base64_encode(implode(",", $payload));
 
         return $encodedRequest;
     }
@@ -183,27 +182,27 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
     
     private function convertToSeconds(string $type, float $count)
     {
-    	$secsPerMin = 60;
-    	$minsPerHour = 60;
-    	$hoursPerDay = 24;
-    	$daysPerWeek = 7;
-    	$daysPerMonth = 30; // We can assume that each month always has 30 days
+        $secsPerMin = 60;
+        $minsPerHour = 60;
+        $hoursPerDay = 24;
+        $daysPerWeek = 7;
+        $daysPerMonth = 30; // We can assume that each month always has 30 days
         $monthsPerYear = 12;
         $yearPerDecade = 10;
         $decadePerCentury = 10;
 
-    	$mapToSeconds = [
+        $mapToSeconds = [
             "c" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear * $yearPerDecade * $decadePerCentury,
             "D" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear * $yearPerDecade,
             "y" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear,
-    		"m" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth,
-    		"w" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerWeek,
-    		"d" => $secsPerMin * $minsPerHour * $hoursPerDay,
-    		"h" => $secsPerMin * $minsPerHour,
-    		"i" => $secsPerMin,
-    		"s" => 1,
-    	];
+            "m" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth,
+            "w" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerWeek,
+            "d" => $secsPerMin * $minsPerHour * $hoursPerDay,
+            "h" => $secsPerMin * $minsPerHour,
+            "i" => $secsPerMin,
+            "s" => 1,
+        ];
         
-    	return (float) $count * $mapToSeconds[$type];
+        return (float) $count * $mapToSeconds[$type];
     }
 }

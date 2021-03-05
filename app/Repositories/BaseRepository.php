@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements BaseRepositoryInterface 
+class BaseRepository implements BaseRepositoryInterface
 {
     /**
      * The repository model
@@ -357,7 +357,9 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function with($relations)
     {
-        if (is_string($relations)) $relations = func_get_args();
+        if (is_string($relations)) {
+            $relations = func_get_args();
+        }
 
         $this->with = $relations;
 
@@ -385,8 +387,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     protected function eagerLoad()
     {
-        foreach($this->with as $relation)
-        {
+        foreach ($this->with as $relation) {
             $this->query->with($relation);
         }
 
@@ -401,23 +402,19 @@ class BaseRepository implements BaseRepositoryInterface
      */
     protected function setClauses()
     {
-        foreach($this->wheres as $where)
-        {
+        foreach ($this->wheres as $where) {
             $this->query->where($where['column'], $where['operator'], $where['value']);
         }
 
-        foreach($this->whereIns as $whereIn)
-        {
+        foreach ($this->whereIns as $whereIn) {
             $this->query->whereIn($whereIn['column'], $whereIn['values']);
         }
 
-        foreach($this->orderBys as $orders)
-        {
+        foreach ($this->orderBys as $orders) {
             $this->query->orderBy($orders['column'], $orders['direction']);
         }
 
-        if(isset($this->take) and ! is_null($this->take))
-        {
+        if (isset($this->take) and ! is_null($this->take)) {
             $this->query->take($this->take);
         }
 
@@ -432,8 +429,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     protected function setScopes()
     {
-        foreach($this->scopes as $method => $args)
-        {
+        foreach ($this->scopes as $method => $args) {
             $this->query->$method(implode(', ', $args));
         }
 

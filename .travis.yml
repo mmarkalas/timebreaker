@@ -1,0 +1,19 @@
+os:
+ - linux
+
+language: php
+
+rvm:
+ - 7.4.15
+ - laravel/lumen
+
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+  - cp .env.travis .env
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+
+script:
+  - vendor/bin/phpunit --coverage-text
+  - phpcs app

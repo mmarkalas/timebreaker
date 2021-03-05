@@ -78,7 +78,7 @@ class TimeBreakController extends Controller
      *                               "updated_at": "2021-03-05T18:19:40.000000Z"
      *                          }
      *                       }
-     *                   
+     *
      *               }
      *         )
      *     )
