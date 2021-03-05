@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: ./docker
+      dockerfile: nginx.app
+    ports:
+      - ${APP_PORT}:80
+    volumes:
+      - .:/var/www/html:delegated
+    depends_on:
+      - app
+      - mysql
+    networks:
+      - timebreaker_network
+
+  mysql:
+    image: mysql:5.7.29
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${DB_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - timebreaker_network
+
+  app:
+    build:
+      context: ./docker
+      dockerfile: app.app
+    volumes:
+      - .:/var/www/html:delegated
+    networks:
+      - timebreaker_network
+
+  composer:
+    build:
+      context: ./docker
+      dockerfile: composer.app
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - app
+    user: timebreaker
+    ports:
+      - 8181:3306
+    entrypoint: ['composer', 'install', '--ignore-platform-reqs']
+    networks:
+      - timebreaker_network
+
+networks:
+  timebreaker_network:

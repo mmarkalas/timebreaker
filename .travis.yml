@@ -1,0 +1,26 @@
+os:
+ - linux
+
+language: php
+
+php:
+ - 7.4.15
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS timebreaker;'
+
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+  - cp .env.travis .env
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+
+script:
+  - php artisan key:generate
+  - php artisan migrate:refresh
+  - vendor/bin/phpunit --coverage-text
+  - phpcs --standard=PSR12 app
