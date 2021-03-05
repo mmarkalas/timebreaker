@@ -192,7 +192,8 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         $decadePerCentury = 10;
 
         $mapToSeconds = [
-            "c" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear * $yearPerDecade * $decadePerCentury,
+            "c" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth *
+                $monthsPerYear * $yearPerDecade * $decadePerCentury,
             "D" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear * $yearPerDecade,
             "y" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth * $monthsPerYear,
             "m" => $secsPerMin * $minsPerHour * $hoursPerDay * $daysPerMonth,

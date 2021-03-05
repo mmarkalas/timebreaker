@@ -8,7 +8,8 @@ class RepositoryServiceProvider extends ServiceProvider
 {
     public $bindings = [
         'App\Repositories\Interfaces\BaseRepositoryInterface' => 'App\Repositories\BaseRepository',
-        'App\Repositories\Interfaces\TimeBreakdownRepositoryInterface' => 'App\Repositories\Eloquent\TimeBreakdownRepository'
+        'App\Repositories\Interfaces\TimeBreakdownRepositoryInterface' =>
+        'App\Repositories\Eloquent\TimeBreakdownRepository'
     ];
 
     /**
