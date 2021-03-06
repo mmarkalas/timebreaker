@@ -30,8 +30,9 @@ After I've identified the scope, deliverables, coding standard & design pattern 
 | Code GET Request (Time Breakdown) | 1 hour |  |
 | Finalize Docker Setup | 1-2 hours |  |
 | Setup CI/CD and Apply Fixes | 4-5 hours |  |
-| Create README Documentaion | 1 hour |  |
-| Create JOURNAL Documentaion | 1 hour |  |
+| Create README Documention | 1 hour |  |
+| Create JOURNAL | 1 hour |  |
+|  | 23.1 hours |  |
 
 ## Improvements
 
