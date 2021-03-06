@@ -1,17 +1,57 @@
-
 #!/bin/bash
 
-# get composer, and install to /usr/local/bin
-if [ ! -f "/usr/local/bin/composer" ];then
+# Exit on error
+set -o errexit -o pipefail
+
+# Update yum
+yum update -y
+
+# Install packages
+yum install -y curl
+yum install -y git
+
+# Remove current apache & php
+yum -y remove httpd* php*
+
+# Install PHP 7.4
+yum install -y php74 php74-cli php74-fpm php74-mysql php74-xml php74-curl php74-opcache php74-pdo php74-gd php74-pecl-apcu php74-mbstring php74-imap php74-pecl-redis php74-mcrypt php74-mysqlnd mod24_ssl
+
+# Install Apache 2.4
+yum -y install httpd24
+
+# Allow URL rewrites
+sed -i 's#AllowOverride None#AllowOverride All#' /etc/httpd/conf/httpd.conf
+
+# Change apache document root
+mkdir -p /var/www/html/public
+sed -i 's#DocumentRoot "/var/www/html"#DocumentRoot "/var/www/html/public"#' /etc/httpd/conf/httpd.conf
+
+# Change apache directory index
+sed -e 's/DirectoryIndex.*/DirectoryIndex index.html index.php/' -i /etc/httpd/conf/httpd.conf
+
+# Get Composer, and install to /usr/local/bin
+if [ ! -f "/usr/local/bin/composer" ]; then
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    php composer-setup.php --install-dir=/usr/bin --filename=composer
     php -r "unlink('composer-setup.php');"
 else
     /usr/local/bin/composer self-update --stable --no-ansi --no-interaction
 fi
 
-# create a COMPOSER_HOME directory for the application
-if [ ! -d "/var/cache/composer" ];then
-    mkdir -p /var/cache/composer
-    chown www.www /var/cache/composer
+# Restart apache
+service httpd start
+
+# Setup apache to start on boot
+chkconfig httpd on
+
+# Ensure aws-cli is installed and configured
+if [ ! -f "/usr/bin/aws" ]; then
+    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+    unzip awscli-bundle.zip
+    ./awscli-bundle/install -b /usr/bin/aws
+fi
+
+# Ensure AWS Variables are available
+if [[ -z "$AWS_ACCOUNT_ID" || -z "$AWS_DEFAULT_REGION " ]]; then
+    echo "AWS Variables Not Set.  Either AWS_ACCOUNT_ID or AWS_DEFAULT_REGION"
 fi
