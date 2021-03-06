@@ -1,16 +1,38 @@
 #!/bin/bash
 
-# go to app directory
-cd /var/www/html
+# Enter html directory
+cd /var/www/html/
 
-# run composer
-COMPOSER_HOME=/var/cache/composer composer install
+# Create cache and chmod folders
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/public/files/
+
+# Install dependencies
+export COMPOSER_ALLOW_SUPERUSER=1
+composer install -d /var/www/html/
+
+# Copy configuration from /var/www/.env, see README.MD for more information
+cp /var/www/html/.env.prod /var/www/html/.env
 
 # run key generate
-php artisan key:generate
+php /var/www/html/artisan key:generate
 
-# run migrations
-php artisan migrate
+# Migrate all tables
+php /var/www/html/artisan migrate
 
 # generate Swagger UI
-php artisan swagger-lume:generate
+php /var/www/html/artisan swagger-lume:generate
+
+# Clear cache
+php /var/www/html/artisan cache:clear
+
+# Change rights for storage
+chmod 777 -R /var/www/html/storage
+
+# Fix user rights
+sudo usermod -a -G apache ec2-user
+sudo chown -R ec2-user:apache /var/www/html
+sudo chmod 2775 /var/www/html
+find /var/www/html -type d -exec sudo chmod 2775 {} \;
+find /var/www/html -type f -exec sudo chmod 0664 {} \;
