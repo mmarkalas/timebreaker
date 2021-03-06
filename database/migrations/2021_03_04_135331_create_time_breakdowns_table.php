@@ -17,7 +17,7 @@ class CreateTimeBreakdownsTable extends Migration
             $table->id();
             $table->timestamp("from_date")->nullable();
             $table->timestamp("to_date")->useCurrent();
-            $table->json("expression");
+            $table->text("expression");
             $table->text("result");
             $table->string("encoded_request")->nullable();
             $table->timestamps();
