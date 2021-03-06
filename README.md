@@ -49,10 +49,20 @@ Once it's ready, we can now send request on
 | LOCAL | http://localhost:8080/timebreak |
 | PRODUCTION | https://ec2-18-138-249-121.ap-southeast-1.compute.amazonaws.com/timebreak |
 
-## Deployment
+## CI/CD
 
 TimeBreaker was successfully integrated with [AWS CodePipeline](https://aws.amazon.com/codepipeline/) and [AWS CodeDeploy](https://aws.amazon.com/codedeploy/) 
 and will trigger the **deployment** process once we merged our changes to the **main** branch.
+
+[Travis CI](https://travis-ci.org/) was also integrated and will do the testing after creating a **Pull Request** to **main** branch.
+
+For more info regarding this integrations, please check the following files in this repository:
+
+```sh
+$ ./appspec.yml
+$ ./scripts/*
+$ ./.travis.yml
+```
 
 ## SWAGGER API DOCUMENTATION
 
@@ -67,6 +77,7 @@ To view the documention and test the endpoints, please visit this link on your b
 TimeBreaker implements [PSR-12](https://www.php-fig.org/psr/psr-12/) Coding Standard and follows the **Repository Design Pattern**.
 
 Here are some links to get you started with **Repository Design Pattern**:
+
 https://asperbrothers.com/blog/implement-repository-pattern-in-laravel/
 https://webdevetc.com/blog/the-repository-pattern-in-php-and-laravel/
 
