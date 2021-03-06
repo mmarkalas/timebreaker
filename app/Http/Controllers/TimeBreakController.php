@@ -166,7 +166,7 @@ class TimeBreakController extends Controller
      *                 {
      *                     "success": false,
      *                     "code": 422,
-     *                     "data": {
+     *                     "errors": {
      *                         "message": "The given data was invalid.",
      *                         "details": {
      *                             "from_date": {
