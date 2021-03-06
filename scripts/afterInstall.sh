@@ -23,6 +23,7 @@ export COMPOSER_ALLOW_SUPERUSER=1
 composer install -d /var/www/html/
 
 # Create Cert and Copy SSL configuration 
+yum -y install mod_ssl
 sudo /etc/pki/tls/certs/make-dummy-cert localhost.crt
 sudo cp /var/www/html/scripts/ssl.conf /etc/httpd/conf.d/ssl.conf
 

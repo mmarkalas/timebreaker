@@ -25,8 +25,8 @@ yum -y remove httpd* php*
 # Install PHP 7.4
 yum  -y install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap,pdo}
 
-# Install Apache and SSL
-yum -y install httpd mod_ssl
+# Install Apache
+yum -y install httpd
 
 # Allow URL rewrites
 sed -i 's#AllowOverride None#AllowOverride All#' /etc/httpd/conf/httpd.conf
