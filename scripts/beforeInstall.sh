@@ -6,6 +6,12 @@ set -o errexit -o pipefail
 # Update yum
 yum update -y
 
+yum install -y amazon-linux-extras
+
+amazon-linux-extras enable php7.4
+
+yum clean metadata
+
 # Install packages
 yum install -y curl
 yum install -y git
@@ -14,7 +20,7 @@ yum install -y git
 yum -y remove httpd* php*
 
 # Install PHP 7.4
-yum install -y php74 php74-cli php74-fpm php74-mysql php74-xml php74-curl php74-opcache php74-pdo php74-gd php74-pecl-apcu php74-mbstring php74-imap php74-pecl-redis php74-mcrypt php74-mysqlnd mod24_ssl
+yum  -y install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap,pdo}
 
 # Install Apache 2.4
 yum -y install httpd24
