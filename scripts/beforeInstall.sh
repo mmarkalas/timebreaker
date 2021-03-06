@@ -55,7 +55,7 @@ chkconfig httpd on
 
 # Install and Setup MariaDB Server
 yum -y install mariadb-server
-service start mariadb
+service mariadb start
 chkconfig mariadb on
 
 # Didn't run mysql_secure_installation
