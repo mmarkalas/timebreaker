@@ -11,6 +11,13 @@ mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache
 mkdir -p /var/www/html/public/files/
 
+# Fix user rights
+sudo usermod -a -G apache ec2-user
+sudo chown -R ec2-user:apache /var/www/html
+sudo chmod 2775 /var/www/html
+find /var/www/html -type d -exec sudo chmod 2775 {} \;
+find /var/www/html -type f -exec sudo chmod 0664 {} \;
+
 # Install dependencies
 export COMPOSER_ALLOW_SUPERUSER=1
 
@@ -35,10 +42,3 @@ touch test.php
 
 # Change rights for storage
 chmod 775 -R /var/www/html/storage
-
-# Fix user rights
-sudo usermod -a -G apache ec2-user
-sudo chown -R ec2-user:apache /var/www/html
-sudo chmod 2775 /var/www/html
-find /var/www/html -type d -exec sudo chmod 2775 {} \;
-find /var/www/html -type f -exec sudo chmod 0664 {} \;
