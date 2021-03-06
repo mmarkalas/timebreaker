@@ -27,18 +27,16 @@ composer install -d /var/www/html/
 cp .env.prod .env
 
 # run key generate
-php /var/www/html/artisan key:generate
+php /var/www/html/artisan key:generate -f
 
 # Migrate all tables
-php /var/www/html/artisan migrate
+php /var/www/html/artisan migrate:refresh -f
 
 # generate Swagger UI
 php /var/www/html/artisan swagger-lume:generate
 
 # Clear cache
 php /var/www/html/artisan cache:clear
-
-touch test.php
 
 # Change rights for storage
 chmod 775 -R /var/www/html/storage

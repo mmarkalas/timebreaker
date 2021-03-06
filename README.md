@@ -36,6 +36,6 @@ http://localhost:8080/timebreak
 
 ### API DOCUMENTATION
 
-To view the documention and test the endpoints, please visit this link:
+To view the documention and test the endpoints, please visit this link on your browser:
 
 http://localhost:8080/api/documentation
