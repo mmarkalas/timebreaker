@@ -28,9 +28,8 @@ yum  -y install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath
 # Install Apache and SSL
 yum -y install httpd, mod_ssl
 
+# Self Signed SSL CRT
 sudo /etc/pki/tls/certs/make-dummy-cert localhost.crt
-
-sudo cp /var/www/html/scripts/ssl.conf /etc/httpd/conf.d/ssl.conf
 
 # Allow URL rewrites
 sed -i 's#AllowOverride None#AllowOverride All#' /etc/httpd/conf/httpd.conf

@@ -20,8 +20,10 @@ find /var/www/html -type f -exec sudo chmod 0664 {} \;
 
 # Install dependencies
 export COMPOSER_ALLOW_SUPERUSER=1
-
 composer install -d /var/www/html/
+
+# Copy SSL configuration 
+sudo cp /var/www/html/scripts/ssl.conf /etc/httpd/conf.d/ssl.conf
 
 # Copy configuration from /var/www/.env
 cp .env.prod .env
