@@ -37,12 +37,13 @@ After I've identified the scope, deliverables, coding standard & design pattern 
 ## Improvements
 
 #### Project Structure
-Since I used Lumen Framework for this assignment, there was only few example files that are included don't need much of cleaning.
+Since I used Lumen Framework for this assignment, there was only few example files that are included, which are now deleted, and don't need much of cleaning.
 
 #### Portability
 To achieved this improvement, I used Docker and Docker-Compose to orchestrate the necessary containers that are needed to run TimeBreaker App.  
-I also ensure that the containers are not to big whick will take time installing, i. e. using a whole OS for a single container. 
-Other developers would only need to download Docker with Docker Compose, clone the repository, and then run the **setup.sh** script I created  
+
+I also ensure that the containers are not to big which will take time installing, i. e. using a whole OS for a single container. 
+Other developers would only need to download **Docker with Docker Compose**, clone the repository, and then run the **setup.sh** script I created  
 which automatically run the necessary commands for any developer.
 
 #### Documentation
