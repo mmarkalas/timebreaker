@@ -15,8 +15,8 @@ mkdir -p /var/www/html/public/files/
 export COMPOSER_ALLOW_SUPERUSER=1
 composer install -d /var/www/html/
 
-# Copy configuration from /var/www/.env, see README.MD for more information
-cp /var/www/html/.env.prod /var/www/html/.env
+# Copy configuration from /var/www/.env
+sudo cp .env.prod .env
 
 # run key generate
 php /var/www/html/artisan key:generate
