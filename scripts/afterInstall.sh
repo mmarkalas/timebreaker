@@ -3,6 +3,9 @@
 # Enter html directory
 cd /var/www/html/
 
+# Create DATABASE
+mysql -u root -e "CREATE DATABASE timebreaker;"
+
 # Create cache and chmod folders
 mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache
@@ -29,6 +32,8 @@ php /var/www/html/artisan cache:clear
 
 # Change rights for storage
 chmod 777 -R /var/www/html/storage
+
+cp .env.prod .env
 
 # Fix user rights
 sudo usermod -a -G apache ec2-user

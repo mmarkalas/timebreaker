@@ -6,10 +6,13 @@ set -o errexit -o pipefail
 # Update yum
 yum update -y
 
+# Install Amazon Linux Extras
 yum install -y amazon-linux-extras
 
+# Enable PHP 7.4 in Amazon Linux Extras
 amazon-linux-extras enable php7.4
 
+# Clean Metedata
 yum clean metadata
 
 # Install packages
@@ -49,6 +52,13 @@ service httpd start
 
 # Setup apache to start on boot
 chkconfig httpd on
+
+# Install and Setup MariaDB Server
+yum -y install mariadb-server
+service start mariadb
+chkconfig mariadb on
+
+# Didn't run mysql_secure_installation
 
 # Ensure aws-cli is installed and configured
 if [ ! -f "/usr/bin/aws" ]; then
