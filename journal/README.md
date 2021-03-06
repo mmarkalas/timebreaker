@@ -9,8 +9,9 @@ After identifying the scope, I also checked the Deadline of the project which wo
 breaking my tasks down.
 
 ## Set Coding Standard and Design Pattern to be Implemented
-After Identifying the scope and deliverables, I also decided which Coding Standard and Design Pattern I'm going to implement for this assignment.  
-I've choose to follow PSR-12 Coding Standard and Repository Pattern because I'm more familiar with it.
+After Identifying the scope and deliverables, I also decided which Coding Standard and Design Pattern I'm going to implement for this assignment. 
+
+I've choose to follow **PSR-12 Coding Standard and Repository Pattern** because I'm more familiar with it.
 
 ## Task Breakdown
 After I've identified the scope, deliverables, coding standard & design pattern to be used, these are the set of tasks that I was able to come-up with:
@@ -55,5 +56,3 @@ I used GitHub, a Design Pattern, optimized Docker Containers, and implemented CI
 
 #### Deployment
 I integrated AWS CodePipeline and CodeDeploy to automatically build and deploy the changes after merging the updates on **main** branch of this Repository.
-
-#### Journal
