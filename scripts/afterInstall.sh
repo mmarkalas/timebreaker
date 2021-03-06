@@ -31,10 +31,10 @@ php /var/www/html/artisan swagger-lume:generate
 # Clear cache
 php /var/www/html/artisan cache:clear
 
-# Change rights for storage
-chmod 777 -R /var/www/html/storage
+touch test.php
 
-cp .env.prod .env
+# Change rights for storage
+chmod 775 -R /var/www/html/storage
 
 # Fix user rights
 sudo usermod -a -G apache ec2-user
