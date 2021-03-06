@@ -1,0 +1,39 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+permissions:
+  - object: /var/www/html
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 4750
+    type:
+      - directory
+  - object: /var/www/html
+    pattern: "**"
+    owner: www
+    group: www
+    mode: 640
+    type:
+      - file
+hooks:
+### reference
+### http://docs.aws.amazon.com/codedeploy/latest/userguide/app-spec-ref-hooks.html
+  ApplicationStop:
+    - location: scripts/applicationStop.sh
+      timeout: 180
+      runas: root
+  BeforeInstall:
+    - location: scripts/beforeInstall.sh
+      timeout: 1200
+      runas: root
+  AfterInstall:
+    - location: scripts/afterInstall.sh
+      timeout: 1200
+      runas: www
+  ApplicationStart:
+    - location: scripts/applicationStart.sh
+      timeout: 180
+      runas: root
