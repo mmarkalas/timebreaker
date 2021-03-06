@@ -26,6 +26,7 @@ composer install -d /var/www/html/
 yum -y install mod_ssl
 sudo /etc/pki/tls/certs/make-dummy-cert localhost.crt
 sudo cp /var/www/html/scripts/ssl.conf /etc/httpd/conf.d/ssl.conf
+sudo service httpd restart
 
 # Copy configuration from /var/www/.env
 cp .env.prod .env
