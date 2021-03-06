@@ -6,7 +6,7 @@ Simple REST API that provides time breakdown based on the expression and date ra
 
 ## Features
 * Accepts 2 format of Expressions: "2m,m,d" and ["2m","m","d"]
-* Allows time breakdown from up to Century ("c")*, down to Seconds ("s")
+* Allows time breakdown from up to Century ("c"), down to Seconds ("s")
 * Search previous time breakdown based on the date range provided
 
 ## Tech
@@ -17,14 +17,14 @@ I've used a number of open source projects/packages to build and manage this App
 * [Sublime Text 3](https://www.sublimetext.com/) - free text editor.
 * [Composer](https://getcomposer.org/) - A Dependency Manager for PHP
 * [Postman](https://www.postman.com/) - API Tool for sending any types of request
-* [SwaggerLume](https://github.com/DarkaOnLine/SwaggerLume)  Wrapper of Swagger-php and swagger-ui adapted to work with Lumen Framework
-* [Docker](https://www.docker.com/) OS-level virtualization to deliver software in packages called containers
-* [Docker Compose](https://docs.docker.com/compose/) Compose is a tool for defining and running multi-container Docker applications
-* [PHPUnit](https://phpunit.de/) Testing framework for PHP and comes with Lumen Framework
-* [Travis CI](https://travis-ci.org/) Test and Deploy with Confidence
-* [AWS CodePipeline](https://aws.amazon.com/codepipeline/)  Continuous Delivery Service
-* [AWS CodeDeploy](https://aws.amazon.com/codedeploy/) Deployment service that automates software deployments
-* [AWS EC2](https://aws.amazon.com/ec2/) Web service that provides secure, resizable compute capacity in the cloud
+* [SwaggerLume](https://github.com/DarkaOnLine/SwaggerLume) - Wrapper of Swagger-php and swagger-ui adapted to work with Lumen Framework
+* [Docker](https://www.docker.com/) - OS-level virtualization to deliver software in packages called containers
+* [Docker Compose](https://docs.docker.com/compose/) - Compose is a tool for defining and running multi-container Docker applications
+* [PHPUnit](https://phpunit.de/) - Testing framework for PHP and comes with Lumen Framework
+* [Travis CI](https://travis-ci.org/) - Test and Deploy with Confidence
+* [AWS CodePipeline](https://aws.amazon.com/codepipeline/) - Continuous Delivery Service
+* [AWS CodeDeploy](https://aws.amazon.com/codedeploy/) - Deployment service that automates software deployments
+* [AWS EC2](https://aws.amazon.com/ec2/) - Web service that provides secure, resizable compute capacity in the cloud
 
 ## Installation
 
