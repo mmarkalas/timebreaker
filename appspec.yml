@@ -6,15 +6,15 @@ files:
 permissions:
   - object: /var/www/html
     pattern: "**"
-    owner: www
-    group: www
+    owner: www-data
+    group: www-data
     mode: 4750
     type:
       - directory
   - object: /var/www/html
     pattern: "**"
-    owner: www
-    group: www
+    owner: www-data
+    group: www-data
     mode: 640
     type:
       - file
@@ -32,7 +32,7 @@ hooks:
   AfterInstall:
     - location: scripts/afterInstall.sh
       timeout: 1200
-      runas: www
+      runas: www-data
   ApplicationStart:
     - location: scripts/applicationStart.sh
       timeout: 180
