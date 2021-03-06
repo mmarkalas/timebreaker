@@ -16,7 +16,7 @@ export COMPOSER_ALLOW_SUPERUSER=1
 /usr/local/bin/composer install -d /var/www/html/
 
 # Copy configuration from /var/www/.env
-sudo cp .env.prod .env
+cp .env.prod .env
 
 # run key generate
 php /var/www/html/artisan key:generate

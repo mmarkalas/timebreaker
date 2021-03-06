@@ -32,7 +32,7 @@ hooks:
   AfterInstall:
     - location: scripts/afterInstall.sh
       timeout: 1200
-      runas: ec2-user
+      runas: root
   ApplicationStart:
     - location: scripts/applicationStart.sh
       timeout: 180
