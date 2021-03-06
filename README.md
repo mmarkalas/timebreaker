@@ -78,7 +78,7 @@ TimeBreaker implements [PSR-12](https://www.php-fig.org/psr/psr-12/) Coding Stan
 
 Here are some links to get you started with **Repository Design Pattern**:
 
-https://asperbrothers.com/blog/implement-repository-pattern-in-laravel/
+https://asperbrothers.com/blog/implement-repository-pattern-in-laravel/  
 https://webdevetc.com/blog/the-repository-pattern-in-php-and-laravel/
 
 ## License
