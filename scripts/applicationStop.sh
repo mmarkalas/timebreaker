@@ -1,7 +1,5 @@
 #!/bin/bash
 
-isExistApp = `pgrep httpd`
+sudo /etc/init.d/nginx stop
 
-if [[ -n  $isExistApp ]]; then
-    service httpd stop        
-fi
+sudo /etc/init.d/php7.4-fpm stop
