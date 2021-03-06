@@ -13,7 +13,7 @@ mkdir -p /var/www/html/public/files/
 
 # Install dependencies
 export COMPOSER_ALLOW_SUPERUSER=1
-composer install -d /var/www/html/
+/usr/local/bin/composer install -d /var/www/html/
 
 # Copy configuration from /var/www/.env
 sudo cp .env.prod .env
