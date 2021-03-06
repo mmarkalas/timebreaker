@@ -30,9 +30,12 @@ $ sh setup.sh
 
 The Setup automatically install everything inside the Docker Containers and we just need to wait until it's done.
 
-Once it's ready, we can now send request on http://localhost:8080/timebreak
+Once it's ready, we can now send request on 
+
+http://localhost:8080/timebreak
 
 ### API DOCUMENTATION
 
 To view the documention and test the endpoints, please visit this link:
+
 http://localhost:8080/api/documentation
