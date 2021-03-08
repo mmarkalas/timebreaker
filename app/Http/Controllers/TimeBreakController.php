@@ -92,6 +92,11 @@ class TimeBreakController extends Controller
     public function index(Request $request)
     {
         return $this->runWithExceptionHandling(function () use ($request) {
+            $this->validate($request, [
+                'from_date' => 'nullable|date|different:to_date',
+                'to_date' => 'nullable|date|different:from_date',
+            ]);
+
             $result = $this->timeBreakdownRepository->search($request);
 
             $this->response->setPayload($result);
