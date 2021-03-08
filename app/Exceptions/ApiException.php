@@ -19,13 +19,11 @@ class ApiException extends HttpResponseException
         $responseBody = [
             'success' => false,
             'code'    => $code,
-            'errors'  => [
-                'message' => $message
-            ]
+            'message' => $message,
         ];
 
         if (!empty($details)) {
-            $responseBody['errors']['details'] = $details;
+            $responseBody['errors'] = $details;
         }
 
         $response->setContent($responseBody)
