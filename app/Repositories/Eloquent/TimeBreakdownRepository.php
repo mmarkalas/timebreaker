@@ -28,6 +28,13 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         $this->cacheService = $cacheService;
     }
 
+    /**
+     * Check if the same request has been queried before and return the results if it has. 
+     * Otherwise, encode the request and process the breakdown.
+     * 
+     * @param  Request $request 
+     * @return array
+     */
     public function process(Request $request)
     {
         $this->parseExpressionAndSet($request->expression);
@@ -44,6 +51,12 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return $result;
     }
 
+    /**
+     * Get all the previous results based on the date-range provided.
+     * 
+     * @param  Request $request
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function search(Request $request)
     {
         $cacheKey = $this->encodeRequest($request);
@@ -70,6 +83,12 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return $result;
     }
 
+    /**
+     * Parse the expression into an Array.
+     * 
+     * @param  mixed $expression    Can be a string '2m,m,d,2h' or ['2m', 'm', 'd', '2h']
+     * @return void
+     */
     private function parseExpressionAndSet($expression)
     {
         $parsed = $expression;
@@ -86,6 +105,12 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return;
     }
 
+    /**
+     * Encode the Request Payload into Base64
+     * 
+     * @param  Request $request
+     * @return string
+     */
     private function encodeRequest(Request $request)
     {
         $payload = $request->all();
@@ -99,6 +124,13 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return $encodedRequest;
     }
 
+    /**
+     * Breakdown the date-range based on the parsed expression.
+     * 
+     * @param  Request $request
+     * @param  string  $encodedRequest
+     * @return array
+     */
     private function mapTimeBreakdown(Request $request, string $encodedRequest)
     {
         $this->model->encoded_request = $encodedRequest;
@@ -109,6 +141,10 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
         $result = [];
 
+        /*
+            Sort the expression first so we can just pass the 
+            remainder for each attribute in the expression.
+         */
         $sortedExpressions = $this->sortExpression($this->model->expression);
 
         foreach ($sortedExpressions as $key => $exp) {
@@ -152,6 +188,12 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return $result;
     }
 
+    /**
+     * Sort the expression based on the specified order and also consider the "count" of expressions.
+     * 
+     * @param  array  $expression
+     * @return array
+     */
     private function sortExpression(array $expression)
     {
         rsort($expression, SORT_NUMERIC);
@@ -180,6 +222,14 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         return $filteredExpression;
     }
 
+    /**
+     * Convert a specific expression to it's equivalent seconds
+     * NOTE: We can assume that each month always has 30 days
+     * 
+     * @param  string $type
+     * @param  float  $count
+     * @return float
+     */
     private function convertToSeconds(string $type, float $count)
     {
         $secsPerMin = 60;

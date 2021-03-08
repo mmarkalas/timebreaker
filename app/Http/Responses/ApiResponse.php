@@ -22,7 +22,6 @@ class ApiResponse
         ];
     }
 
-
     public function getCode()
     {
         return $this->code;

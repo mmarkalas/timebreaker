@@ -27,6 +27,12 @@ class Controller extends BaseController
         $this->response = new ApiResponse();
     }
 
+    /**
+     * Exception Handler to run all the process on Controller's methods.
+     * 
+     * @param  callable $callback   Callback functions from Controller's methods
+     * @return mixed               
+     */
     public function runWithExceptionHandling($callback)
     {
         try {
