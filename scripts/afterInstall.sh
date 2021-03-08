@@ -26,6 +26,14 @@ composer install -d /var/www/html/
 yum -y install mod_ssl
 sudo /etc/pki/tls/certs/make-dummy-cert localhost.crt
 sudo cp /var/www/html/scripts/ssl.conf /etc/httpd/conf.d/ssl.conf
+
+# Hide Server Details except for Product (Apache) in Headers
+sudo cp /var/www/html/scripts/secure.conf /etc/httpd/conf.d/secure.conf
+
+# Hide PHP in Headers
+sudo cp /var/www/html/scripts/hidephp.ini /etc/php.d/hidephp.ini 
+
+# Restart Apache
 sudo service httpd restart
 
 # Copy configuration from /var/www/.env
