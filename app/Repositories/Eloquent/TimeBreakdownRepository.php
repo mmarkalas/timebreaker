@@ -29,10 +29,10 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
     }
 
     /**
-     * Check if the same request has been queried before and return the results if it has. 
+     * Check if the same request has been queried before and return the results if it has.
      * Otherwise, encode the request and process the breakdown.
-     * 
-     * @param  Request $request 
+     *
+     * @param  Request $request
      * @return array
      */
     public function process(Request $request)
@@ -53,7 +53,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
     /**
      * Get all the previous results based on the date-range provided.
-     * 
+     *
      * @param  Request $request
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -85,7 +85,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
     /**
      * Parse the expression into an Array.
-     * 
+     *
      * @param  mixed $expression    Can be a string '2m,m,d,2h' or ['2m', 'm', 'd', '2h']
      * @return void
      */
@@ -107,7 +107,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
     /**
      * Encode the Request Payload into Base64
-     * 
+     *
      * @param  Request $request
      * @return string
      */
@@ -126,7 +126,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
     /**
      * Breakdown the date-range based on the parsed expression.
-     * 
+     *
      * @param  Request $request
      * @param  string  $encodedRequest
      * @return array
@@ -142,7 +142,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
         $result = [];
 
         /*
-            Sort the expression first so we can just pass the 
+            Sort the expression first so we can just pass the
             remainder for each attribute in the expression.
          */
         $sortedExpressions = $this->sortExpression($this->model->expression);
@@ -190,7 +190,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
 
     /**
      * Sort the expression based on the specified order and also consider the "count" of expressions.
-     * 
+     *
      * @param  array  $expression
      * @return array
      */
@@ -225,7 +225,7 @@ class TimeBreakdownRepository extends BaseRepository implements TimeBreakdownRep
     /**
      * Convert a specific expression to it's equivalent seconds
      * NOTE: We can assume that each month always has 30 days
-     * 
+     *
      * @param  string $type
      * @param  float  $count
      * @return float

@@ -29,9 +29,9 @@ class Controller extends BaseController
 
     /**
      * Exception Handler to run all the process on Controller's methods.
-     * 
+     *
      * @param  callable $callback   Callback functions from Controller's methods
-     * @return mixed               
+     * @return mixed
      */
     public function runWithExceptionHandling($callback)
     {
